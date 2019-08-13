@@ -256,7 +256,7 @@ class CSVRelationshipImporter:
         # Otherwise we must look it up.
         else:
             # Build the lucene query
-            lucene_query = field_name + ':\"' + field_value + '\"'
+            lucene_query = '"{}: "{}""'.format(field_name, field_value)
 
             # Make call to Jama API
             try:
@@ -334,7 +334,7 @@ if __name__ == '__main__':
     except FileExistsError:
         pass
     current_date_time = datetime.datetime.now().strftime(config.log_date_time_format)
-    log_file = 'logs/csv_relationship_importer' + str(current_date_time) + '.log'
+    log_file = '{}/{}_{}.log'.format(config.log_directory, config.log_file_name_prefix, str(current_date_time))
     logging.basicConfig(filename=log_file, level=logging.INFO)
     logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
 

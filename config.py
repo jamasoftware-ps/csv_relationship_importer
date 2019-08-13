@@ -28,7 +28,7 @@ client_secret = os.environ.get('JAMA_CLIENT_SECRET')
 ###################################################################################################
 # csv_location can be set to a specific csv file or a directory of csv file to import multiple files at once.
 # NOTE: if using import by directory, all files will be imported with the same configuration.
-csv_location = './csv_with_headers.csv'
+csv_location = './simple_csv_with_headers.csv'
 
 # Set to True if the file has headers, False otherwise; If CSV file does not have headers,header names must be supplied.
 csv_has_headers = True
@@ -54,8 +54,8 @@ source_item_custom_field_name = 'ea_legacy_id'
 target_item_custom_field_name = 'ea_legacy_id'
 
 # Items will only be matched against items in the projects in the following lists, leave empty to match all projects.
-source_project_list = []
-target_project_list = []
+source_project_list = [1279]
+target_project_list = [1279]
 
 # Default relationship type
 default_relationship_type = 4
