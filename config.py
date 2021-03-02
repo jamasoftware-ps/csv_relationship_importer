@@ -39,7 +39,9 @@ csv_headers = []
 csv_source_column = 'SourceGuiID'
 # THe CSV column that contains the data to match the target item
 csv_target_column = 'DestGuiID'
+
 # Optional: This column can set the type of relationship to be created.
+# Set to None if relationship type does not need to be imported
 csv_relationship_type_column = 'Connector_Type'
 
 
@@ -47,7 +49,7 @@ csv_relationship_type_column = 'Connector_Type'
 #    Import settings
 ###################################################################################################
 # Setting match on custom field to False will tell the program to expect raw API ID's, this improves performance.
-match_on_custom_field = True
+match_on_custom_field = False
 
 # The name's of the custom fields to do lookup's.  This is a field on a jama item
 source_item_custom_field_name = 'ea_legacy_id'
