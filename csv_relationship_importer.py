@@ -91,7 +91,7 @@ class CSVRelationshipImporter:
 
                 # Now get the relationship data string if it exists.
                 if relationship_type_column is not None:
-                    relationship_info = row_data[relationship_type_column]
+                    relationship_info = row_data.get(relationship_type_column)
                     current_row_rel_data['rel_type_data'] = relationship_info
 
                 # Append the data from this row to a list for processing.
@@ -172,7 +172,7 @@ class CSVRelationshipImporter:
                 try:
                     prepared_relationship['relationshipType'] = relationship['rel_type_data']
                 except KeyError:
-                    pass
+                    prepared_relationship['relationshipType'] = default_relationship_type_id
             # Append the prepared relationship to the list to be posted.
             self.prepped_relationship_data.append(prepared_relationship)
 
@@ -238,11 +238,11 @@ class CSVRelationshipImporter:
             relationship_data_present = relationship_type_coloumn in csv_dict_reader.fieldnames
             if not relationship_data_present:
                 missing_relationship_header_message = 'You have specified a relationship type header but no ' \
-                                                      'matching column was found. Please check the settings. ' \
-                                                      'specified relationship_type_column: ' \
-                                                      '{}'.format(relationship_type_coloumn)
-                CSVRelationshipImporter.logger.critical(missing_relationship_header_message)
-                raise ValueError(missing_relationship_header_message)
+                                                      'matching column was found. The ' \
+                                                      'specified relationship_type_column (' \
+                                                      '{}) will be set to the ' \
+                                                      'default value.'.format(relationship_type_coloumn)
+                CSVRelationshipImporter.logger.warning(missing_relationship_header_message)
 
     @staticmethod
     def _get_item_id_by_custom_field(field_value, field_name, lookup_table, project_list):
